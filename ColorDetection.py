@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-from ultrasonic import distance1,distance2
 
 def identify_colors(frame):
     # Define color ranges
@@ -37,3 +36,19 @@ def identify_colors(frame):
     black_pixels = np.column_stack(np.where(mask_black > 0))
 
     return red_pixels, green_pixels, blue_pixels, white_pixels, black_pixels
+
+def color_position(coordinates,image_width):
+    if len(coordinates) == 0:
+        return None
+    
+    left_region = image_width // 3
+    right_region = 2 * (image_width // 3)
+    # Define regions for left, center, and right
+
+    centroid_x = np.mean(coordinates[:, 1])
+    if centroid_x < left_region:
+        return "L"
+    elif centroid_x > right_region:
+        return "R"
+    else:
+        return "F"
