@@ -28,7 +28,7 @@ def make_decision(position_red,position_green, position_blue, position_black, po
         elif not blue_completed and position_blue != None:
             return position_blue, "B"
         elif not green_completed and position_green != None:
-            return position_green, "B"
+            return position_green, "G"
         return [],'S'
 
 def main():
