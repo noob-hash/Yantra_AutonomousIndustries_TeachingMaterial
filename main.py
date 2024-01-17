@@ -75,10 +75,8 @@ def main():
                 if pick_color != None:
                     if pick_color == "R":
                         image, decision = find_shape(frame,"Triangle")
-                        red_completed = True
                     elif pick_color == "G":
                         image, decision = find_shape(frame,"Pentagon")
-                        green_completed = True
                     elif pick_color == "B":
                         image, decision = find_shape(frame,"Quadrilateral")
 
@@ -87,9 +85,14 @@ def main():
                         all_motor_off()
                         release()  
                         cam_front()
+                        
                         if pick_color == 'B':
                             blue_completed = True
-                            
+                        elif pick_color == 'R':
+                            red_completed = True
+                        elif pick_color == 'G':
+                            green_completed = True
+
                         pick = False
                         pick_color = None
                         sleep(2)
