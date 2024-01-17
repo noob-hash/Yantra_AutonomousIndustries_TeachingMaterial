@@ -62,3 +62,14 @@ def cam_front():
  set_angle(servos[0],180)
  cleanup(servos)
 
+def main():
+ catch()
+ sleep(1)
+ cam_back()
+ sleep(1)
+ release()
+ sleep(1)
+ cam_front()
+
+if __name__=="__main__":
+ main()
