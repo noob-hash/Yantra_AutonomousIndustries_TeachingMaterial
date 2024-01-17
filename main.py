@@ -44,7 +44,9 @@ def main():
         dist2 = distance2()
 
         if red_completed and green_completed and blue_completed:
-            print("Stop")
+            all_motor_off()
+            print("Done")
+            break
         else:
             if not pick:
                 position_red, position_green, position_blue, position_black, position_white = find_object(frame)
