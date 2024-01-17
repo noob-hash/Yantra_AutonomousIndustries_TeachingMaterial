@@ -50,7 +50,10 @@ def main():
                 position_red, position_green, position_blue, position_black, position_white = find_object(frame)
                 decision, color = make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed)
                 
-                if decision == 'F' and dist1 <= 20:
+                if decision == 'F' and dist1 <= 30:
+                    pick_color = color
+                    pick = True
+                    all_motor_off()
                     catch()
                     cam_back()
                     sleep(2)
@@ -63,8 +66,6 @@ def main():
                         right()
                     elif decision == 'S':
                         all_motor_off()
-                pick_color = color
-                pick = True
                 print("Find Decision:",decision)
 
             else:
@@ -78,19 +79,21 @@ def main():
                     elif pick_color == "B":
                         image, decision = find_shape(frame,"Quadrilateral")
                         green_completed = True
-                    pick = False
-                    if decision == 'F' and dist2 <= 20:
+
+                    if decision == 'F' and dist2 <= 30:
+                        all_motor_off()
                         release()  
                         cam_front()
-                        sleep(2)
                         pick = False
+                        pick_color = None
+                        sleep(2)
                     else:
                         if decision == 'F':
-                            forward()
+                            backward()
                         elif decision == 'L':
-                            left()
-                        elif decision == 'R':
                             right()
+                        elif decision == 'R':
+                            left()
                         elif decision == 'S':
                             all_motor_off()
                 print("Picked Decision",decision)
