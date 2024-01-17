@@ -52,6 +52,7 @@ def main():
                 
                 if decision == 'F' and dist1 <= 30:
                     pick_color = color
+                    print("Picked:",pick_color)
                     pick = True
                     all_motor_off()
                     catch()
@@ -70,7 +71,7 @@ def main():
 
             else:
                 if pick_color != None:
-                    if pick_color == 'R':
+                    if pick_color == "R":
                         image, decision = find_shape(frame,"Triangle")
                         red_completed = True
                     elif pick_color == "G":
@@ -81,6 +82,7 @@ def main():
                         green_completed = True
 
                     if decision == 'F' and dist2 <= 30:
+                        print("Completed list(R,G,B):",red_completed,green_completed,blue_completed)
                         all_motor_off()
                         release()  
                         cam_front()
@@ -97,10 +99,11 @@ def main():
                         elif decision == 'S':
                             all_motor_off()
                 print("Picked Decision",decision)
-
-        cv2.imshow('Frame',frame)   
-        if cv2.waitKey(1) & 0xFF == ord('q'): 
-            break 
+        
+        # enable if you need visualization
+        # cv2.imshow('Frame',frame)   
+        # if cv2.waitKey(1) & 0xFF == ord('q'): 
+        #     break 
 
     vid.release()
     cv2.destroyAllWindows()
