@@ -81,13 +81,15 @@ def main():
                         green_completed = True
                     elif pick_color == "B":
                         image, decision = find_shape(frame,"Quadrilateral")
-                        blue_completed = True
 
                     if decision == 'F' and dist2 <= 30:
                         print("Completed list(R,G,B):",red_completed,green_completed,blue_completed)
                         all_motor_off()
                         release()  
                         cam_front()
+                        if pick_color == 'B':
+                            blue_completed = True
+                            
                         pick = False
                         pick_color = None
                         sleep(2)
