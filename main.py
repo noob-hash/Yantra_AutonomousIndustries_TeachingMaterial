@@ -81,7 +81,7 @@ def main():
                         green_completed = True
                     elif pick_color == "B":
                         image, decision = find_shape(frame,"Quadrilateral")
-                        green_completed = True
+                        blue_completed = True
 
                     if decision == 'F' and dist2 <= 30:
                         print("Completed list(R,G,B):",red_completed,green_completed,blue_completed)
