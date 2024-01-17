@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+from time import sleep  
 def identify_colors(frame):
     # Define color ranges
     lower_red = np.array([0, 100, 100])
@@ -52,3 +52,26 @@ def color_position(coordinates,image_width):
         return "R"
     else:
         return "F"
+
+def main():
+    vid = cv2.VideoCapture(0)
+    while True:
+        _,frame = vid.read()
+        frame = cv2.flip(frame,1)
+        width = frame.shape[1]
+        red_pixels, green_pixels, blue_pixels, white_pixels, black_pixels = identify_colors(frame)
+        print("Red:",color_position(red_pixels,width))
+        print("Green:",color_position(green_pixels,width))
+        print("Blue:",color_position(blue_pixels,width))
+        print("White:",color_position(white_pixels,width))
+        print("Black:",color_position(black_pixels,width))
+        cv2.imshow('Frame',frame)   
+        if cv2.waitKey(1) & 0xFF == ord('q'): 
+            break 
+        sleep(0.5)
+
+    vid.release()
+    cv2.destroyAllWindows()
+
+if __name__== "__main__":
+    main()

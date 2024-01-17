@@ -1,9 +1,11 @@
-# from BotControl import forward,left,right,backward,all_motor_off
+from BotControl import forward,left,right,backward,all_motor_off
 from time import sleep
-# from ServoControl import catch,release,cam_back,cam_front
+from ServoControl import catch,release,cam_back,cam_front
 import cv2
 import numpy as np
 from ColorDetection import identify_colors, color_position
+from DetectShape import find_shape
+from ultrasonic import distance1, distance2
 
 def  find_object(frame):
     width = frame.shape[1]
@@ -17,27 +19,81 @@ def  find_object(frame):
     return position_red,position_green, position_blue, position_black, position_white
 
 def make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed):
-    if red_completed or green_completed or blue_completed:
+    if red_completed and green_completed and blue_completed:
         print("Aa")
         
     else:
         if not red_completed and position_red != None:
-            print("A")
+            return position_red, "R"
+        elif not blue_completed and position_blue != None:
+            return position_blue, "B"
+        elif not green_completed and position_green != None:
+            return position_green, "B"
+        return [],'S'
 
 def main():
     vid = cv2.VideoCapture(0)
     red_completed, green_completed, blue_completed = False,False,False
-
+    pick = False
+    pick_color = None
+    decision = "S"
     while True:
         _,frame = vid.read()
         frame = cv2.flip(frame,1)
-        position_red,position_green, position_blue, position_black, position_white = find_object(frame)
-        decision = make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed)
-        print("Red pixels:", position_red,decision)
-        # print("Green pixels:", position_green)
-        # print("Blue pixels:", position_blue)
-        # print("Black pixels:", position_black)
-        # print("White pixels:", position_white)
+        dist1 = distance1()
+        dist2 = distance2()
+
+        if red_completed and green_completed and blue_completed:
+            print("Stop")
+        else:
+            if not pick:
+                position_red, position_green, position_blue, position_black, position_white = find_object(frame)
+                decision, color = make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed)
+                
+                if decision == 'F' and dist1 <= 20:
+                    catch()
+                    cam_back()
+                    sleep(2)
+                else:
+                    if decision == 'F':
+                        forward()
+                    elif decision == 'L':
+                        left()
+                    elif decision == 'R':
+                        right()
+                    elif decision == 'S':
+                        all_motor_off()
+                pick_color = color
+                pick = True
+                print("Find Decision:",decision)
+
+            else:
+                if pick_color != None:
+                    if pick_color == 'R':
+                        image, decision = find_shape(frame,"Triangle")
+                        red_completed = True
+                    elif pick_color == "G":
+                        image, decision = find_shape(frame,"Pentagon")
+                        green_completed = True
+                    elif pick_color == "B":
+                        image, decision = find_shape(frame,"Quadrilateral")
+                        green_completed = True
+                    pick = False
+                    if decision == 'F' and dist2 <= 20:
+                        release()  
+                        cam_front()
+                        sleep(2)
+                        pick = False
+                    else:
+                        if decision == 'F':
+                            forward()
+                        elif decision == 'L':
+                            left()
+                        elif decision == 'R':
+                            right()
+                        elif decision == 'S':
+                            all_motor_off()
+                print("Picked Decision",decision)
 
         cv2.imshow('Frame',frame)   
         if cv2.waitKey(1) & 0xFF == ord('q'): 
