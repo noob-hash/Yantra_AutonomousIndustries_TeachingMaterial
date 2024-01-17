@@ -81,17 +81,18 @@ def main():
                         image, decision = find_shape(frame,"Quadrilateral")
 
                     if decision == 'F' and dist2 <= 30:
-                        print("Completed list(R,G,B):",red_completed,green_completed,blue_completed)
-                        all_motor_off()
-                        release()  
-                        cam_front()
-                        
+
                         if pick_color == 'B':
                             blue_completed = True
                         elif pick_color == 'R':
                             red_completed = True
                         elif pick_color == 'G':
                             green_completed = True
+                            
+                        print("Completed list(R,G,B):",red_completed,green_completed,blue_completed)
+                        all_motor_off()
+                        release()  
+                        cam_front()
 
                         pick = False
                         pick_color = None
