@@ -18,7 +18,7 @@ def  find_object(frame):
     
     return position_red,position_green, position_blue, position_black, position_white
 
-def make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed):
+def make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed, dist1):
     if red_completed and green_completed and blue_completed:
         print("Aa")
         
@@ -29,7 +29,17 @@ def make_decision(position_red,position_green, position_blue, position_black, po
             return position_blue, "B"
         elif not green_completed and position_green != None:
             return position_green, "G"
-        return [],'S'
+        elif position_red == None and position_green == None and position_blue == None:
+            if position_black != 'F':
+                if dist1 > 30:
+                    return 'F','B'
+                else:
+                    return 'R','B'
+            if position_white == 'F':
+                if dist1 > 30:
+                    return 'F','W'
+                else:
+                    return 'R','W'
 
 def main():
     vid = cv2.VideoCapture(0)
@@ -50,19 +60,33 @@ def main():
         else:
             if not pick:
                 position_red, position_green, position_blue, position_black, position_white = find_object(frame)
-                decision, color = make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed)
+                decision, color = make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed, dist1)
                 
-                if decision == 'F' and dist1 <= 30:
-                    pick_color = color
-                    print("Picked:",pick_color)
-                    pick = True
-                    all_motor_off()
-                    catch()
-                    cam_back()
-                    sleep(2)
+                if color not in ["B", "W"]:
+                    if decision == 'F' and dist1 <= 30:
+                        pick_color = color
+                        print("Picked:",pick_color)
+                        pick = True
+                        all_motor_off()
+                        catch()
+                        cam_back()
+                        sleep(2)
+                    else:
+                        if decision == 'F':
+                            forward()
+                        elif decision == 'L':
+                            left()
+                        elif decision == 'R':
+                            right()
+                        elif decision == 'S':
+                            all_motor_off()
                 else:
                     if decision == 'F':
                         forward()
+                        sleep(1)
+                        right()
+                        sleep(1)
+                        all_motor_off()
                     elif decision == 'L':
                         left()
                     elif decision == 'R':
@@ -88,7 +112,7 @@ def main():
                             red_completed = True
                         elif pick_color == 'G':
                             green_completed = True
-                            
+
                         print("Completed list(R,G,B):",red_completed,green_completed,blue_completed)
                         all_motor_off()
                         release()  
