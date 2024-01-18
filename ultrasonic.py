@@ -58,8 +58,9 @@ def distance2():
     distance = round(distance,2)
     return abs(distance)
 
-'''
-while True:
- print(distance1())
-'''
+
+if __name__ == "__main__":
+    while True:
+        print("1:",distance1())
+        print("2:",distance2())
 

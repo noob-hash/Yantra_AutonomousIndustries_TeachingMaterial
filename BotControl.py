@@ -1,6 +1,5 @@
 import RPi.GPIO as GPIO
-import time
-
+from time import sleep
 GPIO.setmode(GPIO.BOARD)
 
 pins = [8,10,11,12]
@@ -43,4 +42,12 @@ def left():
  all_motor_off()
  motor_on(12)
 
-all_motor_off()
+def main():
+ all_motor_off()
+ sleep(2)
+ forward()
+ sleep(2)
+ all_motor_off()
+
+if __name__ == "__main__":
+ main()
