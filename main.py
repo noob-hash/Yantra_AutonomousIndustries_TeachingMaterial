@@ -3,10 +3,11 @@ from time import sleep
 from ServoControl import catch,release,cam_back,cam_front
 import cv2
 import numpy as np
-from ColorDetection import identify_colors, color_position
+from ColorDetection import identify_colors, color_position, make_decision
 from DetectShape import find_shape
 from ultrasonic import distance1, distance2
 
+#finds the position of different colored objects in the frame
 def  find_object(frame):
     width = frame.shape[1]
     red_pixels, green_pixels, blue_pixels, white_pixels, black_pixels = identify_colors(frame)
@@ -18,40 +19,22 @@ def  find_object(frame):
     
     return position_red,position_green, position_blue, position_black, position_white
 
-def make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed, dist1):
-    if red_completed and green_completed and blue_completed:
-        print("Aa")
-        
-    else:
-        if not red_completed and position_red != None:
-            return position_red, "R"
-        elif not blue_completed and position_blue != None:
-            return position_blue, "B"
-        elif not green_completed and position_green != None:
-            return position_green, "G"
-        elif position_red == None and position_green == None and position_blue == None:
-            if position_black != 'F':
-                if dist1 > 30:
-                    return 'F','B'
-                else:
-                    return 'R','B'
-            if position_white == 'F':
-                if dist1 > 30:
-                    return 'F','W'
-                else:
-                    return 'R','W'
-
+# main loop of program
 def main():
+    all_motor_off() # motor is on mtion when pi is off first signal bot to stop
+
+    # capture video from camera
     vid = cv2.VideoCapture(0)
-    red_completed, green_completed, blue_completed = False,False,False
-    pick = False
-    pick_color = None
-    decision = "S"
+    red_completed, green_completed, blue_completed = False,False,False #determines which tasks are completed
+    pick = False #is servo holding something?
+    pick_color = None # what color object are we holding
+    decision = "S" #trmporary decision can be empty
+
     while True:
         _,frame = vid.read()
-        frame = cv2.flip(frame,1)
-        dist1 = distance1()
-        dist2 = distance2()
+        # frame = cv2.flip(frame,1)
+        dist1 = distance1() # data from ultrasonic sensor 1
+        dist2 = distance2() # data from ultrasonic sensor 2
 
         if red_completed and green_completed and blue_completed:
             all_motor_off()
@@ -63,7 +46,7 @@ def main():
                 decision, color = make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed, dist1)
                 
                 if color not in ["B", "W"]:
-                    if decision == 'F' and dist1 <= 30:
+                    if decision == 'F' and dist1 <= 15:
                         pick_color = color
                         print("Picked:",pick_color)
                         pick = True
@@ -83,9 +66,9 @@ def main():
                 else:
                     if decision == 'F':
                         forward()
-                        sleep(1)
+                        sleep(0.5)
                         right()
-                        sleep(1)
+                        sleep(0.5)
                         all_motor_off()
                     elif decision == 'L':
                         left()
@@ -104,7 +87,7 @@ def main():
                     elif pick_color == "B":
                         image, decision = find_shape(frame,"Quadrilateral")
 
-                    if decision == 'F' and dist2 <= 30:
+                    if decision == 'F' and dist2 <= 15:
 
                         if pick_color == 'B':
                             blue_completed = True

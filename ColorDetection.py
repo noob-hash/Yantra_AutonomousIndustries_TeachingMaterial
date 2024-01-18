@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 from time import sleep  
+
+# find which of following color exists and where
 def identify_colors(frame):
     # Define color ranges
     lower_red = np.array([0, 100, 100])
@@ -37,6 +39,7 @@ def identify_colors(frame):
 
     return red_pixels, green_pixels, blue_pixels, white_pixels, black_pixels
 
+# convert pixel color to where it lies in left, middle or right of screen
 def color_position(coordinates,image_width):
     if len(coordinates) == 0:
         return None
@@ -52,6 +55,31 @@ def color_position(coordinates,image_width):
         return "R"
     else:
         return "F"
+
+
+# to make decisions based on the positions of colored objects and data from ultrasonic sensor 1
+def make_decision(position_red,position_green, position_blue, position_black, position_white,red_completed, green_completed, blue_completed, dist1):
+    if red_completed and green_completed and blue_completed:
+        print("Aa")
+        
+    else:
+        if not red_completed and position_red != None:
+            return position_red, "R"
+        elif not blue_completed and position_blue != None:
+            return position_blue, "B"
+        elif not green_completed and position_green != None:
+            return position_green, "G"
+        elif position_red == None and position_green == None and position_blue == None:
+            if position_black != 'F':
+                if dist1 > 15:
+                    return 'F','B'
+                else:
+                    return 'R','B'
+            if position_white == 'F':
+                if dist1 > 15:
+                    return 'F','W'
+                else:
+                    return 'R','W'
 
 def main():
     vid = cv2.VideoCapture(0)

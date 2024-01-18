@@ -1,8 +1,9 @@
 import cv2
 
+# find and classify shapes in the image
 def find_shape(image, target_shape):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    _, threshold = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+    _, threshold = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY) # threshold to get a binary image
     width = image.shape[1]
     
     contours, _ = cv2.findContours(threshold, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -44,6 +45,7 @@ def find_shape(image, target_shape):
     position = shape_position(x, width)
     return image, position
 
+# determine the position of the detected shape
 def shape_position(x, image_width):
     
     if x is None:
@@ -59,6 +61,8 @@ def shape_position(x, image_width):
     else:
         return "F"
 
+# Main function for capturing video and detecting shapes
+# on;y runs if this program is run as main code
 def main():
     vid = cv2.VideoCapture(0)
 
