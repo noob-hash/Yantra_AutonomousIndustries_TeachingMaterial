@@ -54,15 +54,15 @@ def left():
 
 def main():
  all_motor_off()
- sleep(0.25)
+ sleep(1)
  forward()
- sleep(0.25)
+ sleep(1)
  backward()
- sleep(0.25)
+ sleep(1)
  left()
- sleep(0.25)
+ sleep(1)
  right()
- sleep(0.25)
+ sleep(1)
  all_motor_off()
 
 if __name__ == "__main__":
