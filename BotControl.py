@@ -24,32 +24,35 @@ def all_motor_off():
  for pin in pins:
   motor_off(pin)
 
-def forward():
+# step is just some value I choose to make bot slower
+# you can have yur own preferred one or even not use sleep
+  
+def forward(step = 25):
  all_motor_off()
  motor_on(8)
  motor_on(12)
- sleep(0.25)
+ sleep(step/100)
  all_motor_off()
 
-def backward():
+def backward(step = 25):
  all_motor_off()
  motor_on(10)
  motor_on(11)
- sleep(0.25)
+ sleep(step/100)
  all_motor_off()
 
-def right():
+def right(step = 25):
  all_motor_off()
  motor_on(11)
  motor_on(8)
- sleep(0.25)
+ sleep(step/100)
  all_motor_off()
 
-def left():
+def left(step = 25):
  all_motor_off()
  motor_on(10)
  motor_on(12)
- sleep(0.25)
+ sleep(step/100)
  all_motor_off()
 
 def main():
