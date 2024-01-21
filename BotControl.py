@@ -28,41 +28,41 @@ def forward():
  all_motor_off()
  motor_on(8)
  motor_on(12)
- sleep(1)
+ sleep(0.25)
  all_motor_off()
 
 def backward():
  all_motor_off()
  motor_on(10)
  motor_on(11)
- sleep(1)
+ sleep(0.25)
  all_motor_off()
 
 def right():
  all_motor_off()
  motor_on(11)
  motor_on(8)
- sleep(1)
+ sleep(0.25)
  all_motor_off()
 
 def left():
  all_motor_off()
  motor_on(10)
  motor_on(12)
- sleep(1)
+ sleep(0.25)
  all_motor_off()
 
 def main():
  all_motor_off()
- sleep(1)
+ sleep(0.25)
  forward()
- sleep(1)
+ sleep(0.25)
  backward()
- sleep(1)
+ sleep(0.25)
  left()
- sleep(1)
+ sleep(0.25)
  right()
- sleep(1)
+ sleep(0.25)
  all_motor_off()
 
 if __name__ == "__main__":
