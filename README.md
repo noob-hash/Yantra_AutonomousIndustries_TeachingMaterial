@@ -1,7 +1,9 @@
 # Setup and installation
 ## Downloading Locally
 In CMD(Command Prompt) go to a folder you want to download the files in then do the following command
-git clone https://github.com/noob-hash/Yantra_AutonomousIndustries_TeachingMaterial.git
+
+```git clone https://github.com/noob-hash/Yantra_AutonomousIndustries_TeachingMaterial.git```
+
 ![image](https://github.com/noob-hash/Yantra_AutonomousIndustries_TeachingMaterial/assets/80933227/e0cf9419-ccee-42f1-9e57-970e03713779)
 
 After the folder has been downloaded you can use VScode to open the downloaded folder.
@@ -40,6 +42,9 @@ You need to install a few libraries to run these commands which are listed in th
 ```pip install -r .\requirements.txt```
 
 Make sure the path to requirements.txt is correct.
+
+## File Structure
+
 
 ## Other Errors
 If you find an error when trying to run the Python code such as:
