@@ -25,7 +25,13 @@ To use the created environment you just need to execute the activate file inside
 
 ``` .\<<environment_name>>\Scripts\activate.ps1 ```
 
+Or if you are in Linux, bash or terminal (Raspberry Pi) try:
+
+``` source <<environment_name>>\Scripts\activate.ps1 ```
+
 e.g. ``` .\.env\Scripts\ativate.ps1 ```
+
+or ``` source .env\Scripts\ativate.ps1 ```
 
 If you get the following error
 ![image](https://github.com/noob-hash/Yantra_Swarmonoid-trainingMaterial/assets/80933227/6e6c6ec2-c5de-4244-9711-11a15b294f87)
