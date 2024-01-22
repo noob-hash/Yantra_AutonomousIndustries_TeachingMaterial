@@ -1,4 +1,10 @@
 .env
 /.env
 /env
-/images/files
+/images/files/*
+/images/Calibration_images/*
+/images/Calibration_tests/*
+/images/Calibration_undistorted/*
+!/images/Calibration_images
+!images/Calibration_tests
+!images/Calibration_undistorted
