@@ -25,7 +25,13 @@ To use the created environment you just need to execute the activate file inside
 
 ``` .\<<environment_name>>\Scripts\activate.ps1 ```
 
+Or if you are in Linux, bash or terminal (Raspberry Pi)
+
+``` source \<<environment_name>>\Scripts\activate.ps1 ```
+
 e.g. ``` .\.env\Scripts\ativate.ps1 ```
+
+or ``` source \.env\Scripts\ativate.ps1 ```
 
 If you get the following error
 ![image](https://github.com/noob-hash/Yantra_Swarmonoid-trainingMaterial/assets/80933227/6e6c6ec2-c5de-4244-9711-11a15b294f87)
@@ -43,7 +49,12 @@ You need to install a few libraries to run these commands which are listed in th
 
 Make sure the path to requirements.txt is correct.
 
-## File Structure
+## Note
+If you see the following when running files on your computer, it is intended as RPi.GPIO library is for Raspberry Pi devices and that code is for hardware control as such it is not intended to run on computers.
+![image](https://github.com/noob-hash/Yantra_AutonomousIndustries_TeachingMaterial/assets/80933227/7a85eb0b-5083-4088-91a4-d9dbbd00d763)
+
+In case you try to install RPi.GPIO libary on computer you might see following error. It is also because your device is not a Raspberry Pi device as such intended in your computer devices.
+![image](https://github.com/noob-hash/Yantra_AutonomousIndustries_TeachingMaterial/assets/80933227/d3777963-d1c1-4b4b-8a95-7efc6af2b779)
 
 
 ## Other Errors
