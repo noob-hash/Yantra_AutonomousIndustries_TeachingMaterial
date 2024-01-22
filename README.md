@@ -52,6 +52,7 @@ In case you try to install RPi.GPIO libary on computer you might see following e
 
 ![image](https://github.com/noob-hash/Yantra_AutonomousIndustries_TeachingMaterial/assets/80933227/d3777963-d1c1-4b4b-8a95-7efc6af2b779)
 
+Uncomment RPi.GPIO on requirements.txt file if you are installing on Raspberry Pi.
 
 ## Other Errors
 If you find an error when trying to run the Python code such as:
