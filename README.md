@@ -2,17 +2,17 @@
 
 Welcome to the training repository developed for the Yantra 9.0 event organized by the Robotics Association of Nepal (RAN). This repository is dedicated to preparing participants for the Yantra Autonomous Industry (A.I.) competition.
 
-## Objective:
+## Objective
 
 The primary goal of this repository is to provide a starting point for participants to kickstart their journey into autonomous robotics. The code included here serves as a rudimentary introduction, offering foundational concepts to help participants grasp essential elements. It is crucial to note that the code in this repository is not intended for use in the final competition; instead, it acts as a preliminary resource for participants to build upon.
 
-## Key Points:
+## Key Points
 
 * This repository is part of the pre-competition training program.
 * The code provided is basic and serves as an initial introduction to autonomous robotics.
 * Participants are encouraged to understand and expand upon this foundation to develop their competitive bots for the Yantra 9.0 competition.
 
-## Important Note:
+## Important Note
 
 The code included here is not finalized for competition use. Participants are expected to leverage this repository as a learning tool, gaining comprehension and insights to create robust and competitive solutions for the upcoming event.
 
