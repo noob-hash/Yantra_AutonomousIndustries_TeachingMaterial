@@ -1,7 +1,5 @@
 .env
 /.env
 /env
-/images/Calibration_images/*
-/images/Calibration_tests/*
-/images/Calibration_undistorted/*
-/images/files/*
+/images
+!/images/Calibration_images
