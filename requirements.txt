@@ -1,4 +1,6 @@
 opencv-python
 numpy
-RPi.GPIO
 matplotlib
+
+# Uncomment below if you are unning code on Raspberry Pi and keep it commented if you are on computer
+# RPi.GPIO
