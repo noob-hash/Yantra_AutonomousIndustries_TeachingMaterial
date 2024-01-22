@@ -26,7 +26,7 @@ print(len(images), "images found")
 for num, fileName in enumerate(images):
     # Read the image and convert it to grayscale
     img = cv2.imread(fileName)
-    gray = cv2.cv2tColor(img, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # Flags for chessboard corner detection
     chessboard_flags = cv2.CALIB_CB_ADAPTIVE_THRESH + cv2.CALIB_CB_FAST_CHECK + cv2.CALIB_CB_NORMALIZE_IMAGE
