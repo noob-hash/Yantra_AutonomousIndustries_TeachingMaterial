@@ -25,7 +25,7 @@ def all_motor_off():
   motor_off(pin)
 
 # step is just some value I choose to make bot slower
-# you can have yur own preferred one or even not use sleep
+# you can have your own preferred one or even not use sleep
   
 def forward(step = 25):
  all_motor_off()
