@@ -21,7 +21,6 @@ imgpoints = []
 # Read images from the specified directory
 images = glob.glob('images/Calibration_images/*.jpg')
 print(len(images), "images found")
-
 # Loop through each image for calibration
 for num, fileName in enumerate(images):
     # Read the image and convert it to grayscale
@@ -46,8 +45,8 @@ for num, fileName in enumerate(images):
         cv2.imwrite(f"images/Calibration_tests/test{num}.jpg", img)
         cv2.waitKey(1500)
 
-# Calibrate the camera using the collected object and image points
-ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+        # Calibrate the camera using the collected object and image points
+        ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
 
 # Create a dictionary to store camera calibration parameters
 camera = {}
@@ -67,5 +66,5 @@ for variable in ['ret', 'mtx', 'dist', 'rvecs', 'tvecs']:
 with open("images/files/camera.json", 'w') as f:
     json.dump(camera, f, indent=4, cls=NumpyEncoder)
 
-# Close all Opencv2 windows
+# Close all OpenCV2 windows
 cv2.destroyAllWindows()
